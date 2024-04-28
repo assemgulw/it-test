@@ -4,9 +4,119 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IT Career Test</title>
- 
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    button {
+      display: block;
+      margin: 0 auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 20px;
+    }
+  </style>
 </head>
 <body>
-Hello world!
+
+<div class="container">
+  <h1>IT Career Test</h1>
+  <div class="question">
+    <p>Imagine you're hosting a podcast or blog. Which topic would you be most interested in?</p>
+    <div class="options">
+      <label><input type="checkbox" name="q1" value="management"> Building relationships: secrets of successful negotiations</label>
+      <label><input type="checkbox" name="q1" value="marketing"> Crafting engaging stories</label>
+      <label><input type="checkbox" name="q1" value="design"> Modern graphic tools</label>
+      <label><input type="checkbox" name="q1" value="data_analysis"> Proper financial management</label>
+      <label><input type="checkbox" name="q1" value="programming"> Exciting scientific discoveries</label>
+    </div>
+  </div>
+  <!-- Add more questions here -->
+
+  <button onclick="calculateResult()">Submit</button>
+  <div id="result"></div>
+</div>
+
+<script>
+  function calculateResult() {
+    var categories = {
+      "management": "Management",
+      "marketing": "Marketing",
+      "design": "Design",
+      "data_analysis": "Data Analysis",
+      "programming": "Programming"
+    };
+    var scores = {
+      "management": 0,
+      "marketing": 0,
+      "design": 0,
+      "data_analysis": 0,
+      "programming": 0
+    };
+
+    var totalQuestions = 1; // Update this with the total number of questions
+
+    // Loop through each question
+    for (var i = 1; i <= totalQuestions; i++) {
+      var question = document.getElementsByName("q" + i);
+      for (var j = 0; j < question.length; j++) {
+        if (question[j].checked) {
+          scores[question[j].value] += 1;
+        }
+      }
+    }
+
+    // Calculate percentages
+    var resultText = "<h2>Results:</h2>";
+    for (var category in categories) {
+      var percentage = (scores[category] / totalQuestions) * 100;
+      resultText += "<p>" + categories[category] + ": " + percentage.toFixed(2) + "%</p>";
+    }
+
+    var resultElement = document.getElementById("result");
+    resultElement.innerHTML = resultText;
+  }
+</script>
+
 </body>
 </html>
